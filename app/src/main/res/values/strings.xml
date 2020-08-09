@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">SpaceX Launches</string>
     <string name="button_get_data">Get data</string>
+    <string name="rocket_name">Rocket name:</string>
+    <string name="flight_number">Flight number:</string>
+    <string name="details">Details:</string>
+    <string name="rocket_name_format">Rocket name: %1$s</string>
+    <string name="flight_number_format">Flight number: %1$s</string>
+    <string name="details_format">Details: %1$s</string>
+    <string name="not_available">Not available</string>
 </resources>

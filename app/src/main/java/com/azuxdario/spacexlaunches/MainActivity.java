@@ -10,6 +10,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -21,6 +24,9 @@ import java.net.URL;
 public class MainActivity extends AppCompatActivity {
     private static final String NEXT_LAUNCH_URL = "https://api.spacexdata.com/v4/launches/next";
     TextView textField;
+    TextView rocketName;
+    TextView rocketFlightNumber;
+    TextView rocketDetails;
     Button getDataButton;
 
     @Override
@@ -29,6 +35,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         textField = (TextView) findViewById(R.id.textField);
+        rocketName = (TextView) findViewById(R.id.rocketName);
+        rocketFlightNumber = (TextView) findViewById(R.id.rocketFlightNumber);
+        rocketDetails = (TextView) findViewById(R.id.rocketDetails);
         getDataButton = (Button) findViewById(R.id.getDataButton);
     }
 
@@ -90,6 +99,28 @@ public class MainActivity extends AppCompatActivity {
             super.onPostExecute(result);
             progressDialog.dismiss();
             textField.setText(result);
+            JSONObject jObj;
+            try {
+                jObj = new JSONObject(result);
+
+                if(jObj.isNull("name")) {
+                    rocketName.setText(getString(R.string.rocket_name_format, getString(R.string.not_available)));
+                } else {
+                    rocketName.setText(getString(R.string.rocket_name_format, jObj.getString("name")));
+                }
+                if(jObj.isNull("flight_number")) {
+                    rocketFlightNumber.setText(getString(R.string.flight_number_format, getString(R.string.not_available)));
+                } else {
+                    rocketFlightNumber.setText(getString(R.string.flight_number_format, jObj.getString("flight_number")));
+                }
+                if(jObj.isNull("details")) {
+                    rocketDetails.setText(getString(R.string.details_format, getString(R.string.not_available)));
+                } else {
+                    rocketDetails.setText(getString(R.string.details_format, jObj.getString("details")));
+                }
+            } catch (JSONException e) {
+                Log.e("JSON Parser", "Error parsing data " + e.toString());
+            }
         }
 
         @Override

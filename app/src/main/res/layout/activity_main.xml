@@ -10,6 +10,45 @@
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/rocketName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/rocket_name"
+        android:textColor="@color/colorText"
+        android:textSize="20sp"
+        android:layout_margin="6dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/rocketFlightNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/flight_number"
+        android:textColor="@color/colorText"
+        android:textSize="20sp"
+        android:layout_margin="6dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/rocketDetails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/details"
+        android:textColor="@color/colorText"
+        android:textSize="20sp"
+        android:layout_margin="6dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
         android:id="@+id/textField"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
