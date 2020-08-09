@@ -4,8 +4,12 @@
     <string name="rocket_name">Rocket name:</string>
     <string name="flight_number">Flight number:</string>
     <string name="details">Details:</string>
+    <string name="date">Date:</string>
+    <string name="date_precision">Date precision:</string>
     <string name="rocket_name_format">Rocket name: %1$s</string>
     <string name="flight_number_format">Flight number: %1$s</string>
     <string name="details_format">Details: %1$s</string>
+    <string name="date_format">Date: %1$s UTC</string>
+    <string name="date_precision_format">Date precision: %1$s</string>
     <string name="not_available">Not available</string>
 </resources>

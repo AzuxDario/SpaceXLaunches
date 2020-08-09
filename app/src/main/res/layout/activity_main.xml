@@ -49,6 +49,32 @@
         app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
+        android:id="@+id/rocketDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/date"
+        android:textColor="@color/colorText"
+        android:textSize="20sp"
+        android:layout_margin="6dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/rocketDatePrecision"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/date_precision"
+        android:textColor="@color/colorText"
+        android:textSize="20sp"
+        android:layout_margin="6dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
         android:id="@+id/textField"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

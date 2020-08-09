@@ -27,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
     TextView rocketName;
     TextView rocketFlightNumber;
     TextView rocketDetails;
+    TextView rocketDate;
+    TextView rocketDatePrecision;
     Button getDataButton;
 
     @Override
@@ -38,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
         rocketName = (TextView) findViewById(R.id.rocketName);
         rocketFlightNumber = (TextView) findViewById(R.id.rocketFlightNumber);
         rocketDetails = (TextView) findViewById(R.id.rocketDetails);
+        rocketDate = (TextView) findViewById(R.id.rocketDate);
+        rocketDatePrecision = (TextView) findViewById(R.id.rocketDatePrecision);
         getDataButton = (Button) findViewById(R.id.getDataButton);
     }
 
@@ -117,6 +121,16 @@ public class MainActivity extends AppCompatActivity {
                     rocketDetails.setText(getString(R.string.details_format, getString(R.string.not_available)));
                 } else {
                     rocketDetails.setText(getString(R.string.details_format, jObj.getString("details")));
+                }
+                if(jObj.isNull("date_utc")) {
+                    rocketDate.setText(getString(R.string.date_format, getString(R.string.not_available)));
+                } else {
+                    rocketDate.setText(getString(R.string.date_format, jObj.getString("date_utc")));
+                }
+                if(jObj.isNull("date_precision")) {
+                    rocketDatePrecision.setText(getString(R.string.date_precision_format, getString(R.string.not_available)));
+                } else {
+                    rocketDatePrecision.setText(getString(R.string.date_precision_format, jObj.getString("date_precision")));
                 }
             } catch (JSONException e) {
                 Log.e("JSON Parser", "Error parsing data " + e.toString());
