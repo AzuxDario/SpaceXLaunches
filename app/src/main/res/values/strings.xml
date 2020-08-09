@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">SpaceX Launches</string>
+    <string name="button_get_data">Get data</string>
 </resources>

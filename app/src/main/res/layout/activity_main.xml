@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/colorBackground"
     tools:context=".MainActivity">
 
     <TextView
@@ -14,6 +15,7 @@
         android:layout_height="wrap_content"
         android:text="Hello World!"
         android:textAlignment="center"
+        android:textColor="@color/colorText"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -21,8 +23,10 @@
 
     <Button
         android:id="@+id/getDataButton"
-        android:text="Get data"
+        android:text="@string/button_get_data"
+        android:textColor="@color/colorText"
         android:textAlignment="center"
+        android:background="@color/colorPrimaryDark"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="getData" />
