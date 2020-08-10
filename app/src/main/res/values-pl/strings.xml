@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SpaceX Launches</string>
+    <string name="rocket_name">Nazwa rakiety:</string>
+    <string name="flight_number">Numer lotu:</string>
+    <string name="details">Szczegóły:</string>
+    <string name="date">Data:</string>
+    <string name="date_precision">Dokładność daty:</string>
+    <string name="rocket_name_format">Nazwa rakiety: %1$s</string>
+    <string name="flight_number_format">Numer lotu: %1$s</string>
+    <string name="details_format">Szczegóły: %1$s</string>
+    <string name="date_format">Data: %1$s UTC</string>
+    <string name="date_precision_format">Dokładność daty: %1$s</string>
+    <string name="not_available">Niedostepne</string>
+    <string name="button_check_next_launch">Sprawdź następny start</string>
+</resources>
