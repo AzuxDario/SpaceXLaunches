@@ -38,7 +38,6 @@ public class NextLaunchActivity extends AppCompatActivity {
     TextView rocketDetails;
     TextView rocketDate;
     TextView rocketDatePrecision;
-    Button getDataButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,10 +50,7 @@ public class NextLaunchActivity extends AppCompatActivity {
         rocketDetails = (TextView) findViewById(R.id.rocketDetails);
         rocketDate = (TextView) findViewById(R.id.rocketDate);
         rocketDatePrecision = (TextView) findViewById(R.id.rocketDatePrecision);
-        getDataButton = (Button) findViewById(R.id.getDataButton);
-    }
 
-    public void getData(View v) {
         AsyncTaskRunner runner = new AsyncTaskRunner();
         runner.execute();
     }
