@@ -20,9 +20,18 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
     private static final String NEXT_LAUNCH_URL = "https://api.spacexdata.com/v4/launches/next";
+    private static final String DATE_PRECISION_HALF = "half";
+    private static final String DATE_PRECISION_QUARTER = "quarter";
+    private static final String DATE_PRECISION_YEAR = "year";
+    private static final String DATE_PRECISION_MONTH = "month";
+    private static final String DATE_PRECISION_DAY = "day";
+    private static final String DATE_PRECISION_HOUR = "hour";
     TextView textField;
     TextView rocketName;
     TextView rocketFlightNumber;
@@ -107,31 +116,21 @@ public class MainActivity extends AppCompatActivity {
             try {
                 jObj = new JSONObject(result);
 
-                if(jObj.isNull("name")) {
-                    rocketName.setText(getString(R.string.rocket_name_format, getString(R.string.not_available)));
-                } else {
-                    rocketName.setText(getString(R.string.rocket_name_format, jObj.getString("name")));
-                }
-                if(jObj.isNull("flight_number")) {
-                    rocketFlightNumber.setText(getString(R.string.flight_number_format, getString(R.string.not_available)));
-                } else {
-                    rocketFlightNumber.setText(getString(R.string.flight_number_format, jObj.getString("flight_number")));
-                }
-                if(jObj.isNull("details")) {
-                    rocketDetails.setText(getString(R.string.details_format, getString(R.string.not_available)));
-                } else {
-                    rocketDetails.setText(getString(R.string.details_format, jObj.getString("details")));
-                }
-                if(jObj.isNull("date_utc")) {
-                    rocketDate.setText(getString(R.string.date_format, getString(R.string.not_available)));
-                } else {
-                    rocketDate.setText(getString(R.string.date_format, jObj.getString("date_utc")));
-                }
-                if(jObj.isNull("date_precision")) {
-                    rocketDatePrecision.setText(getString(R.string.date_precision_format, getString(R.string.not_available)));
-                } else {
-                    rocketDatePrecision.setText(getString(R.string.date_precision_format, jObj.getString("date_precision")));
-                }
+                rocketName.setText(getString(R.string.rocket_name_format, jObj.isNull("name") ?
+                        getString(R.string.not_available) :
+                        jObj.getString("name")));
+                rocketFlightNumber.setText(getString(R.string.flight_number_format, jObj.isNull("flight_number") ?
+                        getString(R.string.not_available) :
+                        jObj.getString("flight_number")));
+                rocketDetails.setText(getString(R.string.details_format, jObj.isNull("details") ?
+                        getString(R.string.not_available) :
+                        jObj.getString("details")));
+                rocketDate.setText(getString(R.string.date_format, jObj.isNull("date_utc") ?
+                        getString(R.string.not_available) :
+                        getParsedDate(jObj.getString("date_utc"), jObj.getString("date_precision"))));
+                rocketDatePrecision.setText(getString(R.string.date_precision_format, jObj.isNull("date_precision") ?
+                        getString(R.string.not_available) :
+                        jObj.getString("date_precision")));
             } catch (JSONException e) {
                 Log.e("JSON Parser", "Error parsing data " + e.toString());
             }
@@ -144,5 +143,44 @@ public class MainActivity extends AppCompatActivity {
                     "ProgressDialog",
                     "Wait for data");
         }
+
+        protected String getParsedDate(String dateToParse, String precision) {
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+            String result = null;
+            try {
+                Date date = format.parse(dateToParse);
+
+                if (date != null) {
+                    switch (precision) {
+                        case DATE_PRECISION_HALF:
+                            break;
+                        case DATE_PRECISION_QUARTER:
+                            break;
+                        case DATE_PRECISION_YEAR:
+                            SimpleDateFormat yearDateFormat = new SimpleDateFormat("yyyy");
+                            result = yearDateFormat.format(date);
+                            break;
+                        case DATE_PRECISION_MONTH:
+                            SimpleDateFormat monthDateFormat = new SimpleDateFormat("MM-yyyy");
+                            result = monthDateFormat.format(date);
+                            break;
+                        case DATE_PRECISION_DAY:
+                            SimpleDateFormat dayDateFormat = new SimpleDateFormat("dd-MM-yyyy");
+                            result = dayDateFormat.format(date);
+                            break;
+                        case DATE_PRECISION_HOUR:
+                            SimpleDateFormat hourDateFormat = new SimpleDateFormat("HH:mm dd-MM-yyyy");
+                            result = hourDateFormat.format(date);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            return result;
+        }
+
     }
 }
