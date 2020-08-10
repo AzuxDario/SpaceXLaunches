@@ -3,6 +3,7 @@ package com.azuxdario.spacexlaunches;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,162 +26,18 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
-    private static final String NEXT_LAUNCH_URL = "https://api.spacexdata.com/v4/launches/next";
-    private static final String DATE_PRECISION_HALF = "half";
-    private static final String DATE_PRECISION_QUARTER = "quarter";
-    private static final String DATE_PRECISION_YEAR = "year";
-    private static final String DATE_PRECISION_MONTH = "month";
-    private static final String DATE_PRECISION_DAY = "day";
-    private static final String DATE_PRECISION_HOUR = "hour";
-    TextView textField;
-    TextView rocketName;
-    TextView rocketFlightNumber;
-    TextView rocketDetails;
-    TextView rocketDate;
-    TextView rocketDatePrecision;
-    Button getDataButton;
+    Button checkNextLaunch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        textField = (TextView) findViewById(R.id.textField);
-        rocketName = (TextView) findViewById(R.id.rocketName);
-        rocketFlightNumber = (TextView) findViewById(R.id.rocketFlightNumber);
-        rocketDetails = (TextView) findViewById(R.id.rocketDetails);
-        rocketDate = (TextView) findViewById(R.id.rocketDate);
-        rocketDatePrecision = (TextView) findViewById(R.id.rocketDatePrecision);
-        getDataButton = (Button) findViewById(R.id.getDataButton);
+        checkNextLaunch = (Button) findViewById(R.id.checkNextLaunch);
     }
 
-    public void getData(View v) {
-        AsyncTaskRunner runner = new AsyncTaskRunner();
-        runner.execute();
-    }
-
-    private class AsyncTaskRunner extends AsyncTask<String, String, String> {
-        ProgressDialog progressDialog;
-
-        @Override
-        protected String doInBackground(String... params) {
-            HttpURLConnection connection = null;
-            BufferedReader reader = null;
-
-            try {
-                URL url = new URL(NEXT_LAUNCH_URL);
-                connection = (HttpURLConnection) url.openConnection();
-                connection.connect();
-
-
-                InputStream stream = connection.getInputStream();
-
-                reader = new BufferedReader(new InputStreamReader(stream));
-
-                StringBuffer buffer = new StringBuffer();
-                String line = "";
-
-                while ((line = reader.readLine()) != null) {
-                    buffer.append(line+"\n");
-                    Log.d("Response: ", "> " + line);   //here u ll get whole response...... :-)
-
-                }
-
-                return buffer.toString();
-
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                if (connection != null) {
-                    connection.disconnect();
-                }
-                try {
-                    if (reader != null) {
-                        reader.close();
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            super.onPostExecute(result);
-            progressDialog.dismiss();
-            textField.setText(result);
-            JSONObject jObj;
-            try {
-                jObj = new JSONObject(result);
-
-                rocketName.setText(getString(R.string.rocket_name_format, jObj.isNull("name") ?
-                        getString(R.string.not_available) :
-                        jObj.getString("name")));
-                rocketFlightNumber.setText(getString(R.string.flight_number_format, jObj.isNull("flight_number") ?
-                        getString(R.string.not_available) :
-                        jObj.getString("flight_number")));
-                rocketDetails.setText(getString(R.string.details_format, jObj.isNull("details") ?
-                        getString(R.string.not_available) :
-                        jObj.getString("details")));
-                rocketDate.setText(getString(R.string.date_format, jObj.isNull("date_utc") ?
-                        getString(R.string.not_available) :
-                        getParsedDate(jObj.getString("date_utc"), jObj.getString("date_precision"))));
-                rocketDatePrecision.setText(getString(R.string.date_precision_format, jObj.isNull("date_precision") ?
-                        getString(R.string.not_available) :
-                        jObj.getString("date_precision")));
-            } catch (JSONException e) {
-                Log.e("JSON Parser", "Error parsing data " + e.toString());
-            }
-        }
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            progressDialog = ProgressDialog.show(MainActivity.this,
-                    "ProgressDialog",
-                    "Wait for data");
-        }
-
-        protected String getParsedDate(String dateToParse, String precision) {
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-            String result = null;
-            try {
-                Date date = format.parse(dateToParse);
-
-                if (date != null) {
-                    switch (precision) {
-                        case DATE_PRECISION_HALF:
-                            break;
-                        case DATE_PRECISION_QUARTER:
-                            break;
-                        case DATE_PRECISION_YEAR:
-                            SimpleDateFormat yearDateFormat = new SimpleDateFormat("yyyy");
-                            result = yearDateFormat.format(date);
-                            break;
-                        case DATE_PRECISION_MONTH:
-                            SimpleDateFormat monthDateFormat = new SimpleDateFormat("MM-yyyy");
-                            result = monthDateFormat.format(date);
-                            break;
-                        case DATE_PRECISION_DAY:
-                            SimpleDateFormat dayDateFormat = new SimpleDateFormat("dd-MM-yyyy");
-                            result = dayDateFormat.format(date);
-                            break;
-                        case DATE_PRECISION_HOUR:
-                            SimpleDateFormat hourDateFormat = new SimpleDateFormat("HH:mm dd-MM-yyyy");
-                            result = hourDateFormat.format(date);
-                            break;
-                        default:
-                            break;
-                    }
-                }
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-            return result;
-        }
-
+    public void checkNextLaunch(View v) {
+        Intent intent = new Intent(this, NextLaunchActivity.class);
+        startActivity(intent);
     }
 }
