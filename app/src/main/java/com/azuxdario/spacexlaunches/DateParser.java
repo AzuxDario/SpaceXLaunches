@@ -26,12 +26,12 @@ public class DateParser {
             if (date != null) {
                 switch (precision) {
                     case DATE_PRECISION_HALF:
-                        int half = calendar.get(Calendar.MONTH) / 2;
+                        int half = calendar.get(Calendar.MONTH) / 2 + 1;
                         SimpleDateFormat halfDateFormat = new SimpleDateFormat("yyyy");
                         result = Integer.toString(half) + App.getResourses().getString(R.string.half_of) + halfDateFormat.format(date);
                         break;
                     case DATE_PRECISION_QUARTER:
-                        int quarter = calendar.get(Calendar.MONTH) / 4;
+                        int quarter = calendar.get(Calendar.MONTH) / 4 + 1;
                         SimpleDateFormat quarterDateFormat = new SimpleDateFormat("yyyy");
                         result = Integer.toString(quarter) + App.getResourses().getString(R.string.quarter_of) + quarterDateFormat.format(date);
                         break;
