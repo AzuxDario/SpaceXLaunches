@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">SpaceX Launches</string>
-    <string name="rocket_name">Nazwa rakiety:</string>
+    <string name="rocket_name">Nazwa:</string>
     <string name="flight_number">Numer lotu:</string>
     <string name="details">Szczegóły:</string>
     <string name="date">Data:</string>

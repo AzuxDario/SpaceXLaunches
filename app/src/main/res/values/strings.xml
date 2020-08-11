@@ -2,7 +2,7 @@
     <string name="app_name">SpaceX Launches</string>
     <string name="button_check_next_launch">Check next launch</string>
     <string name="button_check_upcoming">Check upcoming</string>
-    <string name="rocket_name">Rocket name:</string>
+    <string name="rocket_name">Name:</string>
     <string name="flight_number">Flight number:</string>
     <string name="details">Details:</string>
     <string name="date">Date:</string>
