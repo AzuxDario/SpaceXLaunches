@@ -1,7 +1,10 @@
 package com.azuxdario.spacexlaunches;
 
+import android.app.Application;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class DateParser {
@@ -17,12 +20,20 @@ public class DateParser {
         String result = null;
         try {
             Date date = format.parse(dateToParse);
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(date);
 
             if (date != null) {
                 switch (precision) {
                     case DATE_PRECISION_HALF:
+                        int half = calendar.get(Calendar.MONTH) % 2;
+                        SimpleDateFormat halfDateFormat = new SimpleDateFormat("yyyy");
+                        result = Integer.toString(half) + App.getResourses().getString(R.string.half_of) + halfDateFormat.format(date);
                         break;
                     case DATE_PRECISION_QUARTER:
+                        int quarter = calendar.get(Calendar.MONTH) % 4;
+                        SimpleDateFormat quarterDateFormat = new SimpleDateFormat("yyyy");
+                        result = Integer.toString(quarter) + App.getResourses().getString(R.string.quarter_of) + quarterDateFormat.format(date);
                         break;
                     case DATE_PRECISION_YEAR:
                         SimpleDateFormat yearDateFormat = new SimpleDateFormat("yyyy");
