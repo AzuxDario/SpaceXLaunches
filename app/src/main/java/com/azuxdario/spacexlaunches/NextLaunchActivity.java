@@ -21,7 +21,6 @@ import java.net.URL;
 
 public class NextLaunchActivity extends AppCompatActivity {
     private static final String NEXT_LAUNCH_URL = "https://api.spacexdata.com/v4/launches/next";
-    TextView textField;
     TextView rocketName;
     TextView rocketFlightNumber;
     TextView rocketDetails;
@@ -33,7 +32,6 @@ public class NextLaunchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_next_launch);
 
-        textField = (TextView) findViewById(R.id.textField);
         rocketName = (TextView) findViewById(R.id.rocketName);
         rocketFlightNumber = (TextView) findViewById(R.id.rocketFlightNumber);
         rocketDetails = (TextView) findViewById(R.id.rocketDetails);
@@ -96,7 +94,6 @@ public class NextLaunchActivity extends AppCompatActivity {
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
             progressDialog.dismiss();
-            textField.setText(result);
             JSONObject jObj;
             try {
                 jObj = new JSONObject(result);
