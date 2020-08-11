@@ -27,6 +27,7 @@ import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
     Button checkNextLaunch;
+    Button checkUpcoming;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,10 +35,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         checkNextLaunch = (Button) findViewById(R.id.checkNextLaunch);
+        checkUpcoming = (Button) findViewById(R.id.checkUpcoming);
     }
 
     public void checkNextLaunch(View v) {
         Intent intent = new Intent(this, NextLaunchActivity.class);
+        startActivity(intent);
+    }
+
+    public void checkUpcoming(View v) {
+        Intent intent = new Intent(this, UpcomingActivity.class);
         startActivity(intent);
     }
 }

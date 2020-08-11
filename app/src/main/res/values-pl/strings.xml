@@ -13,4 +13,5 @@
     <string name="date_precision_format">Dokładność daty: %1$s</string>
     <string name="not_available">Niedostepne</string>
     <string name="button_check_next_launch">Sprawdź następny start</string>
+    <string name="button_check_upcoming">Sprawdź nadchodzące starty</string>
 </resources>

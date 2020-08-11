@@ -19,4 +19,14 @@
         android:layout_height="wrap_content"
         android:onClick="checkNextLaunch" />
 
+    <Button
+        android:id="@+id/checkUpcoming"
+        android:text="@string/button_check_upcoming"
+        android:textColor="@color/colorText"
+        android:textAlignment="center"
+        android:background="@color/colorPrimaryDark"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="checkUpcoming" />
+
 </LinearLayout>
